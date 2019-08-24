@@ -11,7 +11,7 @@ string $currentShelf = `tabLayout -query -selectTab $gShelfTopLevel`;
 setParent $currentShelf;
 string $asInstallScriptLocation=`asInstallScriptLocation`;
 
-string $command= "import sys\n\nLibrary_DIR = r\"" + $asInstallScriptLocation + $subDir + "\"\n\nif not Library_DIR in sys.path:\n    sys.path.append(Library_DIR)\n\nimport ViewportCapture\nreload(ViewportCapture)\n\ncapture_tool = ViewportCapture.ViewportCapture()\ncapture_tool.show()";
+string $command= "import sys\n\nLibrary_DIR = r\"" + $asInstallScriptLocation + $subDir + "\"\n\nif not Library_DIR in sys.path:\n    sys.path.append(Library_DIR)\n\nimport ViewportCapture\nreload(ViewportCapture)\n\ncapture_tool = ViewportCapture.mayaWin()";
 
 string $icon=$asInstallScriptLocation + $subDir + $ImagePath + "." +$iconExt;
 shelfButton

@@ -7,7 +7,6 @@ from Qt import QtWidgets
 import os
 import ctypes
 
-
 class ImageUtil(object):
     
     def __init__(self):
@@ -287,8 +286,7 @@ class QtImageUtil(ImageUtil):
 
         painter = QtGui.QPainter()
         _image = QtGui.QImage(total_width, total_height, QtGui.QImage.Format_ARGB32)
-        # TODO 采样第一张图片的第一个像素颜色作为背景颜色
-        # TODO 如果背景为渐变蓝色无法输出正确的颜色 
+        # TODO 采样第一张图片的第一个像素颜色作为背景颜色 如果背景为渐变蓝色无法输出正确的颜色 
         # TODO 数据丢失问题 https://stackoverflow.com/questions/22023296/avoid-color-quantization-when-painting-translucent-colors-in-qt?noredirect=1&lq=1
         _image.fill(QtGui.QColor(image_list[0].pixel(0,0)))
         painter.begin(_image)
@@ -312,34 +310,6 @@ class QtImageUtil(ImageUtil):
 
         return _image
 
-class PILImageUtil(ImageUtil):
-
-    def __init__(self):
-        pass
-
-    def getActiveM3dViewImage(self):
-        image = super(PILImageUtil,self).getActiveM3dViewImage()
-        return self.getImage(image)
-
-    def getImage(self,image):
-        """getImage 将 MImage 的数据 转换为 PIL Image 对象
-        
-        Arguments:
-            image {MImage} --  Maya API的图片对象
-        
-        Returns:
-            [Image] -- PIL的图片对象
-        """     
-
-        # NOTE https://forums.autodesk.com/t5/maya-programming/maya-2016-grabbing-m3dview-with-python/td-p/5979432
-
-        size = image.getSize()
-        # NOTE 获取 MImage 的像素数据
-        ptr = self.getImagePixel(image,False)
-        img = Image.fromstring("RGBA",size,ptr)
-        return img
-
-
 DIR = os.path.dirname(__file__)
 
 def maya_test():
@@ -360,10 +330,3 @@ def qt_test():
     output = os.path.join(DIR, "viewport2.jpg")
 
     img.save(output,format = 'jpg')
-
-def PIL_test():
-    util = PILImageUtil()
-    img = util.getActiveM3dViewImage()
-    output = os.path.join(DIR, "viewport3.jpg")
-    print("save file")
-    img.save(output, 'jpeg')
