@@ -63,7 +63,7 @@ class MayaImageUtil(ImageUtil):
     def __init__(self):
         pass
 
-    def cropImage(self, image, x=0, y=0, width=100, height=100):
+    def cropImage(self, image, x=0, y=0, width=200, height=200):
         u'''
         cropImage 图片裁剪
 
@@ -94,20 +94,20 @@ class MayaImageUtil(ImageUtil):
         if y+height > img_height:
             height = img_height - y
 
-        origin_pixels = self.getImagePixel(image)
+        _pixels = self.getImagePixel(image)
 
         # NOTE https://groups.google.com/forum/#!topic/python_inside_maya/Q9NuAd6Av20
         pixels = bytearray(width*height*4)
-        for _i, i in enumerate(range(x, x+width)):
-            for _j, j in enumerate(range(y, y+height)):
+        for i, _i in enumerate(range(x, x+width)):
+            for j, _j in enumerate(range(y, y+height)):
                 # NOTE 分别获取当前像素的坐标
-                _pos = (_i+_j*width)*4
-                pos = (i+j*img_width)*4
+                _pos = (_i+_j*img_width)*4
+                pos = (i+j*width)*4
                 # NOTE 这里加数字代表当前像素下 RGBA 四个通道的值
-                pixels[_pos+0] = origin_pixels[pos+0]
-                pixels[_pos+1] = origin_pixels[pos+1]
-                pixels[_pos+2] = origin_pixels[pos+2]
-                pixels[_pos+3] = origin_pixels[pos+3]
+                pixels[pos+0] = _pixels[_pos+0]
+                pixels[pos+1] = _pixels[_pos+1]
+                pixels[pos+2] = _pixels[_pos+2]
+                pixels[pos+3] = _pixels[_pos+3]
 
         # NOTE 返回裁剪的 Image
         img = OpenMaya.MImage()
@@ -122,8 +122,8 @@ class MayaImageUtil(ImageUtil):
             image {MImage} --  Maya API的图片对象
 
         Keyword Arguments:
-            width {int} -- 宽度 (default: {200})
-            height {int} -- 高度 (default: {200})
+            width {int} -- 宽度 (default: {500})
+            height {int} -- 高度 (default: {500})
 
         Returns:
             [MImage] -- 裁剪的图像
