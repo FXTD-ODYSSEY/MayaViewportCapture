@@ -20,7 +20,7 @@
    <item>
     <widget class="QPushButton" name="Process_BTN">
      <property name="text">
-      <string>输出图片序列</string>
+      <string>选择物体渲染</string>
      </property>
     </widget>
    </item>

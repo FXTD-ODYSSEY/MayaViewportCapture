@@ -52,16 +52,6 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QCheckBox" name="Focus_CB">
-          <property name="text">
-           <string>自动聚焦</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QCheckBox" name="Limit_CB">
           <property name="text">
            <string>限制输出5个角度</string>
