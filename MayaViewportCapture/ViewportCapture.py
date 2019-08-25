@@ -123,7 +123,6 @@ class ViewportCapture(ViewportCaptureGeneral):
         img_list = []
         for cam in self.cam_setting.camera_setting:
             pm.lookThru(cam)
-            time.sleep(1)
             img = self.captureImage()
             if img: img_list.append(img)
         
