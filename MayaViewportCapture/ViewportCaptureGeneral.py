@@ -26,7 +26,7 @@ class ViewportCaptureGeneral(QtWidgets.QWidget):
         help_menu = menu.addMenu(u'帮助')
         help_action = QtWidgets.QAction(u'使用帮助', widget)    
         help_menu.addAction(help_action)
-        help_action.triggered.connect(lambda x:webbrowser.open_new_tab(INSTRUNCTION_PATH))
+        help_action.triggered.connect(lambda:webbrowser.open_new_tab(INSTRUNCTION_PATH))
 
     def showProcess(self):
         """
