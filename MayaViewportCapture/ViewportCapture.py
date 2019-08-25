@@ -31,6 +31,8 @@ from ViewportCaptureGeneral import ViewportCaptureGeneral
 from ViewportCaptureSetting import ViewportCaptureSetting
 from ViewportCaptureCameraSetting import ViewportCaptureCameraSetting
 
+DIR = os.path.dirname(__file__)
+
 class ViewportCapture(ViewportCaptureGeneral):
     u"""
     ViewportCapture 主界面
