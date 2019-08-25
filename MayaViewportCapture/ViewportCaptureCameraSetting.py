@@ -25,7 +25,9 @@ from ViewportCaptureCameraSettingItem import ViewportCaptureCameraSettingItem
 DIR = os.path.dirname(__file__)
 
 class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
-
+    """
+    ViewportCaptureCameraSetting 摄像机设置界面
+    """
     def __init__(self):
         super(ViewportCaptureCameraSetting,self).__init__()
 
@@ -68,7 +70,9 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         self.addHelpMenu(self,self.menu)
     
     def addCamItem(self):
-        
+        """
+        addCamItem 添加摄像机Item
+        """
         text,ok = QtWidgets.QInputDialog.getText(self, self.tr("新建摄像机角度"),self.tr("输入摄像机角度名称"))
         if ok and text:
             cam = self.addCam(text,0,0)
@@ -77,6 +81,9 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         self.showProcess()
 
     def batchLoadCamData(self):
+        """
+        batchLoadCamData 批量保存摄像机属性
+        """
         # NOTE 遍历所有的item
         count = self.Cam_Item_Scroll.layout().count()-1
         for i in reversed(range(self.Cam_Item_Scroll.layout().count())): 
@@ -85,6 +92,9 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
                 item.loadCamData()
 
     def importJsonSetting(self):
+        """
+        importJsonSetting 导入 Json 设置
+        """
         path,_ = QFileDialog.getOpenFileName(self, caption=u"获取摄像机设置",filter= u"json (*.json)")
         if not path:return
 
@@ -98,6 +108,9 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         self.showProcess()
 
     def exportJsonSetting(self):
+        """
+        exportJsonSetting 导出 Json 设置
+        """
         path,_ = QFileDialog.getSaveFileName(self, caption=u"输出摄像机设置",filter= u"json (*.json)")
         if not path:return
                 
@@ -108,11 +121,20 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
             QtWidgets.QMessageBox.warning(self, "Warning", "保存失败")
 
     def resetJsonSetting(self):
+        """
+        resetJsonSetting 重置默认设置
+        """
         self.initialzie_cam = True
         # NOTE 更新面板内容
         self.showProcess()
 
     def managerSignal(self,manager):
+        """
+        managerSignal 继承自General类 容器依附到 Maya 窗口后触发事件
+
+        Arguments:
+            manager {ViewportCaptureManager} -- 组件管理容器
+        """
         func = partial(self.clearTempGrp,manager)
         self.main_action.triggered.connect(func)
         self.Back_BTN.clicked.connect(func)
@@ -123,11 +145,19 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         self.close_action.triggered.connect(manager.window().close)
 
     def clearTempGrp(self,manager):
+        """
+        clearTempGrp 返回主界面 删除临时的组
+        
+        Arguments:
+            manager {ViewportCaptureManager} -- 组件管理容器
+        """
         manager.changeWidgetTo(manager.main)
         pm.delete(self.grp)
 
     def showProcess(self):
-
+        """
+        showProcess 继承自 General 类 切换界面的时候触发
+        """
         self.sel_list = pm.ls(sl=1)
         if not self.sel_list:
             self.sel_list = [mesh.getParent() for mesh in pm.ls(type="mesh")]
@@ -183,7 +213,21 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         self.manager.setting.limitCam()
 
     def addCam(self,text,rx=-45,ry=45,ortho=False,json=True,t_r_list=None):
-
+        """addCam 添加摄像机
+        
+        Arguments:
+            text {str} -- 摄像机名称
+        
+        Keyword Arguments:
+            rx {int} -- x轴旋转角度 (default: {-45})
+            ry {int} -- y轴旋转角度 (default: {45})
+            ortho {bool} -- 正交属性 (default: {False})
+            json {bool} -- 是否存储当前设置的属性 (default: {True})
+            t_r_list {tuple} -- 位移和旋转的组合元组 (default: {None})
+        
+        Returns:
+            [camera] -- Maya 的 Camera 对象
+        """
         fit = self.manager.setting.Fit_SP.value()
 
         cam,cam_shape = pm.camera(n=text)

@@ -32,7 +32,9 @@ from ViewportCaptureSetting import ViewportCaptureSetting
 from ViewportCaptureCameraSetting import ViewportCaptureCameraSetting
 
 class ViewportCapture(ViewportCaptureGeneral):
-
+    u"""
+    ViewportCapture 主界面
+    """
     def __init__(self):
         super(ViewportCapture,self).__init__()
         # NOTE 加载UI文件
@@ -56,6 +58,14 @@ class ViewportCapture(ViewportCaptureGeneral):
         self.Process_BTN.clicked.connect(self.capture)
     
     def managerSignal(self,manager):
+        """
+        managerSignal 继承自 General 类
+        
+        Manager 依附到 Maya 窗口后触发事件
+
+        Arguments:
+            manager {ViewportCaptureManager} -- Manager
+        """
         # NOTE 添加 mian 的窗口切换
         func = partial(manager.changeWidgetTo,manager.setting)
         self.setting_action.triggered.connect(func)
@@ -65,9 +75,10 @@ class ViewportCapture(ViewportCaptureGeneral):
         # NOTE 添加关闭窗口触发
         self.close_action.triggered.connect(manager.window().close)
 
-
     def capture(self):
-        
+        """
+        capture 截取图片输出
+        """
         file_path,_ = QFileDialog.getSaveFileName(self, caption=u"获取输出图片路径",filter= u"png (*.png);;jpg (*.jpg)")
 
         # NOTE 判断是否是空路径
@@ -115,28 +126,38 @@ class ViewportCapture(ViewportCaptureGeneral):
             time.sleep(1)
             img = self.captureImage()
             if img: img_list.append(img)
-
+        
+        # Note 合并图片
         img = self.util.mergeImage(img_list,horizontal=self.setting.Horizontal_RB.isChecked())
 
         ext = os.path.splitext(file_path)[-1][1:]
+        # Note 不同API的输出指令不一样进行区分
         if API:
             img.writeToFile(file_path, ext)
         else:
             img.save(file_path,format = ext)
 
-        # NOTE 恢复显示UI
+        # NOTE 恢复HUD显示
         pm.modelEditor(active_panel,e=1,hud=display_1)
         pm.modelEditor(active_panel,e=1,grid=display_2)
         pm.modelEditor(active_panel,e=1,m=display_3)
         pm.modelEditor(active_panel,e=1,hos=display_4)
         pm.modelEditor(active_panel,e=1,sel=display_5)
 
+        # NOTE 恢复之前的摄像机视角并删除临时的摄像机组
         pm.lookThru(active_cam)
         pm.delete(self.cam_setting.grp)
 
+        # NOTE 输出成功信息
         QtWidgets.QMessageBox.information(self,u"输出完成",u"图片输出成功\n输出路径:%s"%file_path)
 
     def captureImage(self):
+        """
+        captureImage 截取单个视角的图片
+        
+        Returns:
+            [Image] -- 根据图片处理API返回相应的图片
+        """
         img = self.util.getActiveM3dViewImage()
         
         if self.setting.Crop_CB.isChecked():
@@ -152,6 +173,9 @@ class ViewportCapture(ViewportCaptureGeneral):
 
 
 class ViewportCaptureManager(QtWidgets.QWidget):
+    u"""
+    ViewportCaptureManager 组件管理容器
+    """
     def __init__(self):
         super(ViewportCaptureManager,self).__init__()
 
@@ -168,6 +192,9 @@ class ViewportCaptureManager(QtWidgets.QWidget):
         self.layout().addWidget(self.main)
     
     def managerSignal(self):
+        """
+        managerSignal 触发内部组件事件
+        """
         for widget in self.widget_list:
             widget.manager = self
             widget.managerSignal(self)
@@ -185,6 +212,11 @@ class ViewportCaptureManager(QtWidgets.QWidget):
         self.window().resize(300,100)
 
     def changeWidgetTo(self,widget):
+        """changeWidgetTo 切换组件
+        
+        Arguments:
+            widget {QWidget} -- 要切换到的组件
+        """
         # Note 清空当前页面
         for i in reversed(range(self.layout().count())): 
             widgetToRemove = self.layout().itemAt(i).widget()
@@ -211,6 +243,7 @@ def mayaWin():
     window = pm.window("viewport_capture",title=u"viewport输出工具")
 
     pm.showWindow(window)
+    # NOTE 将Maya窗口转换成 Qt 组件
     ptr = mayaToQT(window)
     ptr.setLayout(QtWidgets.QVBoxLayout())
     ptr.layout().setContentsMargins(0,0,0,0)

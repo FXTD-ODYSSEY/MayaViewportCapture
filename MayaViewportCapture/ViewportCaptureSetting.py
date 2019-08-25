@@ -16,7 +16,9 @@ DIR = os.path.dirname(__file__)
 SETTING_PATH = os.path.join(DIR,"json","setting.json")
 
 class ViewportCaptureSetting(ViewportCaptureGeneral):
-
+    """
+    ViewportCaptureSetting 设置界面
+    """
     def __init__(self):
         super(ViewportCaptureSetting,self).__init__()
         # NOTE 加载UI文件
@@ -52,6 +54,7 @@ class ViewportCaptureSetting(ViewportCaptureGeneral):
         self.export_json_action.triggered.connect(self.exportJsonSetting)
         self.reset_json_action.triggered.connect(self.resetJsonSetting)
 
+        # NOTE 当设置界面的UI改变时，将数据存储到默认的json路径中
         self.Crop_CB.stateChanged.connect(self.enableCrop)
         self.Horizontal_RB.clicked.connect(partial(self.exportJsonSetting,SETTING_PATH))
         self.Vertical_RB.clicked.connect(partial(self.exportJsonSetting,SETTING_PATH))
@@ -67,6 +70,12 @@ class ViewportCaptureSetting(ViewportCaptureGeneral):
             self.importJsonSetting(SETTING_PATH)
 
     def importJsonSetting(self,path=None):
+        """
+        importJsonSetting 导入Json
+        
+        Keyword Arguments:
+            path {str} -- 导入路径 为空则弹出选择窗口获取 (default: {None})
+        """
         if not path:
             path,_ = QFileDialog.getOpenFileName(self, caption=u"获取设置",filter= u"json (*.json)")
             if not path:return
@@ -94,6 +103,12 @@ class ViewportCaptureSetting(ViewportCaptureGeneral):
         self.Fit_SP.setValue(self.setting_data["Fit_SP"])
 
     def exportJsonSetting(self,path=None):
+        """
+        exportJsonSetting 导出Json
+        
+        Keyword Arguments:
+            path {str} -- 导出路径 为空则弹出选择窗口获取 (default: {None})
+        """
         if not path:
             path,_ = QFileDialog.getSaveFileName(self, caption=u"输出设置",filter= u"json (*.json)")
             if not path:return
@@ -113,6 +128,9 @@ class ViewportCaptureSetting(ViewportCaptureGeneral):
             QtWidgets.QMessageBox.warning(self, "Warning", "保存失败")
 
     def resetJsonSetting(self):
+        """
+        resetJsonSetting 重置设置
+        """
         self.Horizontal_RB.setChecked(True)
         self.Maya_RB.setChecked(True)
         self.Crop_CB.setChecked(True)
@@ -122,11 +140,17 @@ class ViewportCaptureSetting(ViewportCaptureGeneral):
         self.Fit_SP.setValue(0.8)
 
     def enableCrop(self):
+        """
+        enableCrop 开启截取并保存设置
+        """
         check = self.Crop_CB.isChecked()
         self.Crop_Widget.setEnabled(check)
         self.exportJsonSetting(SETTING_PATH)
 
     def limitCam(self):
+        """
+        limitCam 限制只能输出5个摄像机
+        """
         check = self.Limit_CB.isChecked()
         cam_panel = self.manager.cam_setting
         count = cam_panel.Cam_Item_Scroll.layout().count()-1
@@ -134,10 +158,16 @@ class ViewportCaptureSetting(ViewportCaptureGeneral):
             if i != count and i >= 5:
                 item = cam_panel.Cam_Item_Scroll.layout().itemAt(i).widget()
                 item.setEnabled(not check)
-
+    
         cam_panel.Add_Cam_BTN.setEnabled(count < 5 or not check)
 
     def managerSignal(self,manager):
+        """
+        managerSignal 继承自General类 容器依附到 Maya 窗口后触发事件
+
+        Arguments:
+            manager {ViewportCaptureManager} -- 组件管理容器
+        """
         func = partial(manager.changeWidgetTo,manager.main)
         self.back_action.triggered.connect(func)
         self.Back_BTN.clicked.connect(func)

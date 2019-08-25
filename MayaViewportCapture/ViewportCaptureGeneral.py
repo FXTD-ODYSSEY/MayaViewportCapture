@@ -17,13 +17,28 @@ class ViewportCaptureGeneral(QtWidgets.QWidget):
         super(ViewportCaptureGeneral,self).__init__()
 
     def addHelpMenu(self,widget,menu):
+        """addHelpMenu 添加帮助菜单
+        
+        Arguments:
+            widget {QWidget} -- 组件的 self 实例
+            menu {QMenu} -- 组件的 menu 实例
+        """
         help_menu = menu.addMenu(u'帮助')
         help_action = QtWidgets.QAction(u'使用帮助', widget)    
         help_menu.addAction(help_action)
         help_action.triggered.connect(lambda x:webbrowser.open_new_tab(INSTRUNCTION_PATH))
 
     def showProcess(self):
+        """
+        showProcess 切换界面的时候触发
+        """
         pass
 
     def managerSignal(self,manager):
+        """
+        managerSignal 容器依附到 Maya 窗口后触发事件
+        
+        Arguments:
+            manager {ViewportCaptureManager} -- 组件管理容器
+        """
         pass
