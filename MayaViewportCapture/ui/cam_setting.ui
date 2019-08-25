@@ -76,7 +76,7 @@
      <item>
       <widget class="QPushButton" name="Save_BTN">
        <property name="text">
-        <string>保存设置</string>
+        <string>批量保存修改</string>
        </property>
       </widget>
      </item>

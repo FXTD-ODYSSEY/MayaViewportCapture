@@ -16,7 +16,7 @@ import webbrowser
 import json
 from collections import OrderedDict
 from functools import partial
-from ImgUtil import MayaImageUtil
+from ImgUtil import MayaImageUtil,QtImageUtil
 
 DIR = os.path.dirname(__file__)
 INSTRUNCTION_PATH = "file:///" + os.path.join(DIR,"instruction","README.html")
@@ -42,7 +42,6 @@ class ViewportCaptureGeneral(QtWidgets.QWidget):
         pass
 
 
-
 class ViewportCaptureSetting(ViewportCaptureGeneral):
 
     def __init__(self):
@@ -53,23 +52,54 @@ class ViewportCaptureSetting(ViewportCaptureGeneral):
 
         self.menu = QtWidgets.QMenuBar(self)
         self.edit_menu = self.menu.addMenu(u'编辑')
-        self.back_action = QtWidgets.QAction(u'返回', self)    
+
+        self.back_action        = QtWidgets.QAction(u'主界面', self)    
+        self.cam_setting_action = QtWidgets.QAction(u'摄像机设置', self)    
+        self.close_action       = QtWidgets.QAction(u'关闭', self)    
+
+
         self.edit_menu.addAction(self.back_action)
+        self.edit_menu.addAction(self.cam_setting_action)
+        self.edit_menu.addSeparator()
+        self.edit_menu.addAction(self.close_action)
+
         self.addHelpMenu(self,self.menu)
+
+        self.Crop_CB.stateChanged.connect(self.enableCrop)
+
+    def enableCrop(self):
+        check = self.Crop_CB.isChecked()
+        self.Crop_Widget.setEnabled(check)
+
+    def limitCam(self):
+        check = self.Limit_CB.isChecked()
+        cam_panel = self.manager.cam_setting
+        count = cam_panel.Cam_Item_Scroll.layout().count()-1
+        for i in reversed(range(cam_panel.Cam_Item_Scroll.layout().count())): 
+            if i != count and i >= 5:
+                item = cam_panel.Cam_Item_Scroll.layout().itemAt(i).widget()
+                item.setEnabled(not check)
+
+        cam_panel.Add_Cam_BTN.setEnabled(count < 5 or not check)
 
     def managerSignal(self,manager):
         func = partial(manager.changeWidgetTo,manager.main)
         self.back_action.triggered.connect(func)
         self.Back_BTN.clicked.connect(func)
 
+        func = partial(manager.changeWidgetTo,manager.cam_setting)
+        self.cam_setting_action.triggered.connect(func)
+
+        self.close_action.triggered.connect(manager.window().close)
 
 class ViewportCaptureCameraSettingItem(QtWidgets.QWidget):
 
-    def __init__(self,cam):
+    def __init__(self,cam,widget):
         super(ViewportCaptureCameraSettingItem,self).__init__()
         ui_file = os.path.join(DIR,"ui","item.ui")
         loadUi(ui_file,self)
 
+        self.widget = widget
         self.cam = cam
         self.loadCamData()
 
@@ -103,6 +133,7 @@ class ViewportCaptureCameraSettingItem(QtWidgets.QWidget):
     def deleteLater(self):
         super(ViewportCaptureCameraSettingItem,self).deleteLater()
         del self.cam.setting[self.cam.name()]
+        self.widget.showProcess()
 
 
     def orthographicState(self,check):
@@ -155,24 +186,47 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         self.import_json_action = QtWidgets.QAction(u'导入设置', self)    
         self.export_json_action = QtWidgets.QAction(u'导出设置', self)  
         self.reset_json_action  = QtWidgets.QAction(u'重置设置', self)    
-        self.back_action        = QtWidgets.QAction(u'返回', self)    
+        self.main_action        = QtWidgets.QAction(u'主界面', self)    
+        self.setting_action     = QtWidgets.QAction(u'插件设置', self)    
+        self.close_action       = QtWidgets.QAction(u'关闭', self)    
 
         self.edit_menu.addAction(self.import_json_action)
         self.edit_menu.addAction(self.export_json_action)
         self.edit_menu.addAction(self.reset_json_action)
         self.edit_menu.addSeparator()
-        self.edit_menu.addAction(self.back_action)
+        self.edit_menu.addAction(self.main_action)
+        self.edit_menu.addAction(self.setting_action)
+        self.edit_menu.addSeparator()
+        self.edit_menu.addAction(self.close_action)
 
         # NOTE 添加下拉菜单的功能触发
         self.import_json_action.triggered.connect(self.importJsonSetting)
         self.export_json_action.triggered.connect(self.exportJsonSetting)
         self.reset_json_action.triggered.connect(self.resetJsonSetting)
-
+        
+        self.Save_BTN.clicked.connect(self.batchLoadCamData)
+        self.Add_Cam_BTN.clicked.connect(self.addCamItem)
         self.addHelpMenu(self,self.menu)
     
+    def addCamItem(self):
+        
+        text,ok = QtWidgets.QInputDialog.getText(self, self.tr("新建摄像机角度"),self.tr("输入摄像机角度名称"))
+        if ok and text:
+            cam = self.addCam(text,0,0)
+            self.cam_list.append(cam)
+        
+        self.showProcess()
+
+    def batchLoadCamData(self):
+        # NOTE 遍历所有的item
+        count = self.Cam_Item_Scroll.layout().count()-1
+        for i in reversed(range(self.Cam_Item_Scroll.layout().count())): 
+            if i != count:
+                item = self.Cam_Item_Scroll.layout().itemAt(i).widget()
+                item.loadCamData()
+
     def importJsonSetting(self):
-        path = QFileDialog.getOpenFileName(self, caption=u"获取摄像机设置",filter= u"json (*.json)")
-        path = path[0]
+        path,_ = QFileDialog.getOpenFileName(self, caption=u"获取摄像机设置",filter= u"json (*.json)")
         if not path:return
 
         # NOTE 如果文件不存在则返回空
@@ -185,8 +239,7 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         self.showProcess()
 
     def exportJsonSetting(self):
-        path = QFileDialog.getSaveFileName(self, caption=u"输出摄像机设置",filter= u"json (*.json)")
-        path = path[0]
+        path,_ = QFileDialog.getSaveFileName(self, caption=u"输出摄像机设置",filter= u"json (*.json)")
         if not path:return
                 
         try:
@@ -202,19 +255,28 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
 
     def managerSignal(self,manager):
         func = partial(self.clearTempGrp,manager)
-        self.back_action.triggered.connect(func)
+        self.main_action.triggered.connect(func)
         self.Back_BTN.clicked.connect(func)
+
+        func = partial(manager.changeWidgetTo,manager.setting)
+        self.setting_action.triggered.connect(func)
+
+        self.close_action.triggered.connect(manager.window().close)
 
     def clearTempGrp(self,manager):
         manager.changeWidgetTo(manager.main)
         pm.delete(self.grp)
 
     def showProcess(self):
-        
+
+        self.sel_list = pm.ls(sl=1)
+        if not self.sel_list:
+            self.sel_list = [mesh.getParent() for mesh in pm.ls(type="mesh")]
+
         # NOTE 获取当前使用的摄像机视角
         for panel in pm.getPanel(type="modelPanel"):
             if pm.modelEditor(panel,q=1,av=1):
-                active_cam = pm.modelEditor(panel,q=1,camera=1)
+                self.active_cam = pm.modelEditor(panel,q=1,camera=1)
                 break
 
         self.cam_list = []
@@ -250,16 +312,21 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         # NOTE 根据设置逐个添加摄像机 item
         for cam in self.cam_list:
             cam.setting = self.camera_setting
-            item = ViewportCaptureCameraSettingItem(cam)
+            item = ViewportCaptureCameraSettingItem(cam,self)
             
             count = self.Cam_Item_Scroll.layout().count()
             self.Cam_Item_Scroll.layout().insertWidget(count-1,item)
           
         # NOTE 还原当前使用的摄像机视角
-        pm.lookThru(active_cam)
+        pm.lookThru(self.active_cam)
 
-    def addCam(self,text,rx=-45,ry=45,fit=0.5,ortho=False,json=True,t_r_list=None):
-        
+        # NOTE 是否禁用添加按钮
+        self.manager.setting.limitCam()
+
+    def addCam(self,text,rx=-45,ry=45,ortho=False,json=True,t_r_list=None):
+
+        fit = self.manager.setting.Fit_SP.value()
+
         cam,cam_shape = pm.camera(n=text)
         text = cam.name()
 
@@ -268,7 +335,8 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
         # Note 隐藏摄像机
         cam.visibility.set(0)
             
-        # Note 设置旋转值用于
+        # Note 如果传入这个变量说明是读取数据 安装数据设置摄像机
+        pm.select(self.sel_list)
         if t_r_list:
             t,r = t_r_list
             cam.t.set(t)
@@ -279,8 +347,12 @@ class ViewportCaptureCameraSetting(ViewportCaptureGeneral):
             pm.lookThru(cam)
             pm.viewFit(f=fit,all=0)
 
-        cam_shape.orthographic.set(ortho)
+        if ortho:
+            cam_shape.orthographic.set(ortho)
+            pm.lookThru(cam)
+            pm.viewFit(f=fit/2,all=0)
 
+        # NOTE 是否将数组输出到到字典上
         if json:
             self.camera_setting[text] = {}
             self.camera_setting[text]["translate"] = cam.t.get().tolist()
@@ -322,24 +394,31 @@ class ViewportCapture(ViewportCaptureGeneral):
         self.cam_setting_action.triggered.connect(func)
 
         # NOTE 添加关闭窗口触发
-        self.close_action.triggered.connect(self.window().close)
+        self.close_action.triggered.connect(manager.window().close)
+
 
     def capture(self):
-        print "captureImage"
+        
+        file_path,_ = QFileDialog.getSaveFileName(self, caption=u"获取输出图片路径",filter= u"png (*.png);;jpg (*.jpg)")
 
-        file_path = QFileDialog.getSaveFileName(self, caption=u"获取输出图片路径",filter= u"jpg (*.jpg)")
-        # NOTE 获取路径
-        file_path = file_path[0]
-        # NOTE 判断是否是合法的路径
-        if not os.path.isdir(os.path.dirname(file_path)):
+        # NOTE 判断是否是空路径
+        if not file_path:
             return
-
+        
         # NOTE 获取当前激活的面板 (modelPanel4)
         for panel in pm.getPanel(type="modelPanel"):
             if pm.modelEditor(panel,q=1,av=1):
+                active_cam = pm.modelEditor(panel,q=1,camera=1)
                 active_panel = panel
                 break
 
+        # NOTE 获取当前 HUD 相关的显示状态
+        display_1 = pm.modelEditor(active_panel,q=1,hud=1)
+        display_2 = pm.modelEditor(active_panel,q=1,grid=1)
+        display_3 = pm.modelEditor(active_panel,q=1,m=1)
+        display_4 = pm.modelEditor(active_panel,q=1,hos=1)
+        display_5 = pm.modelEditor(active_panel,q=1,sel=1)
+        
         # NOTE 隐藏界面显示
         pm.modelEditor(active_panel,e=1,hud=0)
         pm.modelEditor(active_panel,e=1,grid=0)
@@ -348,19 +427,53 @@ class ViewportCapture(ViewportCaptureGeneral):
         pm.modelEditor(active_panel,e=1,sel=0)
         
         # NOTE 触发截屏处理
-        self.captureImage(file_path)
+        self.cam_setting = self.manager.cam_setting
+        self.setting = self.manager.setting
+        # NOTE 根据设置窗口的选项 获取图片处理的API
+        API = self.setting.Maya_RB.isChecked()
+        if API:
+            self.util = MayaImageUtil()
+        else:
+            self.util = QtImageUtil()
+
+        # NOTE 创建临时摄像机组
+        self.cam_setting.showProcess()
+        
+        # NOTE 获取摄像机截取的画面
+        img_list = []
+        for cam in self.cam_setting.camera_setting:
+            pm.lookThru(cam)
+            img = self.captureImage()
+            if img: img_list.append(img)
+        
+        img = self.util.mergeImage(img_list,horizontal=self.setting.Horizontal_RB.isChecked())
+
+        ext = os.path.splitext(file_path)[-1][1:]
+        if API:
+            img.writeToFile(file_path, ext)
+        else:
+            img.save(file_path,format = ext)
 
         # NOTE 恢复显示UI
-        pm.modelEditor(active_panel,e=1,hud=1)
-        pm.modelEditor(active_panel,e=1,grid=1)
-        pm.modelEditor(active_panel,e=1,m=1)
-        pm.modelEditor(active_panel,e=1,hos=1)
-        pm.modelEditor(active_panel,e=1,sel=1)
-    
-    def captureImage(self,file_path):
-        util = MayaImageUtil()
-        img = util.getActiveM3dViewImage()
-        img = util.centerCropImage(img)
+        pm.modelEditor(active_panel,e=1,hud=display_1)
+        pm.modelEditor(active_panel,e=1,grid=display_2)
+        pm.modelEditor(active_panel,e=1,m=display_3)
+        pm.modelEditor(active_panel,e=1,hos=display_4)
+        pm.modelEditor(active_panel,e=1,sel=display_5)
+
+        pm.lookThru(active_cam)
+        pm.delete(self.cam_setting.grp)
+
+        QtWidgets.QMessageBox.information(self,u"输出完成",u"图片输出成功\n输出路径:%s"%file_path)
+
+    def captureImage(self):
+        img = self.util.getActiveM3dViewImage()
+        
+        if self.setting.Crop_CB.isChecked():
+            width = self.setting.Width_SP.value()
+            height = self.setting.Height_SP.value()
+            img = self.util.centerCropImage(img,width,height)
+
         if not img:
             QtWidgets.QMessageBox.warning(self, u"警告", u"图片输出失败")
             return
@@ -387,15 +500,19 @@ class ViewportCaptureManager(QtWidgets.QWidget):
     
     def managerSignal(self):
         for widget in self.widget_list:
-            widget.managerSignal(self)
             widget.manager = self
+            widget.managerSignal(self)
         
         # NOTE 添加删除摄像机组的事件
         def deleteTempData():
             if pm.objExists("temp_capture_grp"):
                 pm.delete("temp_capture_grp")
+            pm.lookThru(self.cam_setting.active_cam)
+        
         self.window().destroyed.connect(deleteTempData)
-        self.window().adjustSize()
+
+        # NOTE 最后调整显示大小
+        self.window().resize(300,100)
 
     def changeWidgetTo(self,widget):
         # Note 清空当前页面
@@ -430,3 +547,5 @@ def mayaWin():
     ptr.layout().addWidget(panel)
     # NOTE 添加管理事件
     panel.managerSignal()
+
+    return panel
