@@ -38,7 +38,7 @@
         <item>
          <widget class="QRadioButton" name="Qt_RB">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Qt   API</string>
@@ -86,7 +86,7 @@
         <item row="0" column="0" colspan="2">
          <widget class="QCheckBox" name="Crop_CB">
           <property name="text">
-           <string>使用裁剪</string>
+           <string>使用居中裁剪</string>
           </property>
           <property name="checked">
            <bool>true</bool>

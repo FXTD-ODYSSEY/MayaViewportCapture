@@ -4,7 +4,7 @@ ehthumbs.db
 Desktop.ini
 
 # Python:
-*.py[cod]
+*.py[co]
 *.so
 *.egg
 *.egg-info
