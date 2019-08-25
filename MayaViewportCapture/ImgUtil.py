@@ -196,8 +196,25 @@ class QtImageUtil(ImageUtil):
         pass
     
     def getActiveM3dViewImage(self):
-        image = super(QtImageUtil,self).getActiveM3dViewImage()
-        return self.getQIamge(image)
+        # image = super(QtImageUtil,self).getActiveM3dViewImage()
+        # return self.getQIamge(image)
+        
+        # NOTE 通过 API 获取 viewport
+        viewport = OpenMayaUI.M3dView.active3dView()
+        viewport.refresh()
+
+        # NOTE 获取 viewport 中缓存的渲染图
+        img = OpenMaya.MImage()
+        viewport.readColorBuffer(img, True)
+
+        width, height = img.getSize()
+        # NOTE 获取 MImage 的像素数据
+        ptr = self.getImagePixel(img,False)
+        img = QtGui.QImage(ptr, width, height, QtGui.QImage.Format_ARGB32)
+        img = img.rgbSwapped().mirrored(horizontal=False, vertical=True)
+        
+        return img
+
 
     def getQIamge(self,image):
         """getQIamge 将 MImage 的数据 转换为 QImage
@@ -215,7 +232,7 @@ class QtImageUtil(ImageUtil):
         # NOTE 获取 MImage 的像素数据
         ptr = self.getImagePixel(image,False)
         img = QtGui.QImage(ptr, width, height, QtGui.QImage.Format_ARGB32)
-        img = img.mirrored(horizontal=False, vertical=True)
+        img = img.rgbSwapped().mirrored(horizontal=False, vertical=True)
         return img
     
     def cropImage(self,image, x=0, y=0, width=100, height=100):
