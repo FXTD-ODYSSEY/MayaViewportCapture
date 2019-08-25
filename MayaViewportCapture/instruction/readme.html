@@ -1,0 +1,389 @@
+<!DOCTYPE html><html><head>
+      <title>readme</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///D:\Users\82047\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.4.3\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 align="center">
+Maya Vieport Capture Tool <br>&#x3010;Maya&#x89C6;&#x7A97;&#x622A;&#x53D6;&#x5DE5;&#x5177;&#x3011;
+</h1>
+<hr>
+<h2 class="mume-header" id="%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E">&#x5B89;&#x88C5;&#x8BF4;&#x660E;</h2>
+
+<blockquote>
+<p>&#x5C06; install.mel &#x62D6;&#x62FD;&#x5230; maya &#x89C6;&#x7A97;&#x5F53;&#x4E2D;&#xFF0C;&#x5F53;&#x524D;&#x7684;&#x5DE5;&#x5177;&#x67B6;&#x4F1A;&#x591A;&#x51FA;&#x4E00;&#x4E2A; &#x6444;&#x50CF;&#x673A; &#x56FE;&#x6807;&#x6309;&#x94AE;<br>
+&#x70B9;&#x51FB; &#x56FE;&#x6807;&#x6309;&#x94AE; &#x5373;&#x53EF;&#x6253;&#x5F00; &#x7A97;&#x53E3;</p>
+</blockquote>
+<p><img src="../../img/01.gif" alt="&#x5B89;&#x88C5;"></p>
+<h2 class="mume-header" id="%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">&#x4F7F;&#x7528;&#x8BF4;&#x660E;</h2>
+
+<h3 class="mume-header" id="%E4%B8%BB%E7%95%8C%E9%9D%A2">&#x4E3B;&#x754C;&#x9762;</h3>
+
+<blockquote>
+<p>&#x9009;&#x62E9;&#x9700;&#x8981;&#x6E32;&#x67D3;&#x7684;&#x7269;&#x4F53;&#x70B9;&#x51FB;&#x6309;&#x94AE;&#x8F93;&#x51FA;&#x5408;&#x6210;&#x7684;&#x56FE;&#x7247;</p>
+</blockquote>
+<p><img src="../../img/02.gif" alt="&#x8F93;&#x51FA;"></p>
+<blockquote>
+<p>&#x8F93;&#x51FA;&#x6548;&#x679C;&#x5982;&#x4E0B;&#x56FE;</p>
+</blockquote>
+<p><img src="../../img/03.png" alt="&#x8F93;&#x51FA;"></p>
+<blockquote>
+<p><code>&#x7F16;&#x8F91;</code> &#x4E0B;&#x62C9;&#x83DC;&#x5355;&#x6709; <code>&#x6444;&#x50CF;&#x673A;&#x8BBE;&#x7F6E;</code> <code>&#x63D2;&#x4EF6;&#x8BBE;&#x7F6E;</code><br>
+&#x53EF;&#x4EE5;&#x6253;&#x5F00;&#x63D2;&#x4EF6;&#x7684;&#x8BBE;&#x7F6E;&#x9762;&#x677F;</p>
+</blockquote>
+<p><img src="../../img/04.png" alt="&#x7F16;&#x8F91;"></p>
+<blockquote>
+<p><code>&#x5E2E;&#x52A9;</code> &#x4E0B;&#x62C9;&#x83DC;&#x5355;&#x6709; <code>&#x4F7F;&#x7528;&#x5E2E;&#x52A9;</code> &#x53EF;&#x4EE5;&#x6253;&#x5F00;&#x5E2E;&#x52A9;&#x7F51;&#x9875;</p>
+</blockquote>
+<p><img src="../../img/04.png" alt="&#x5E2E;&#x52A9;"></p>
+<h2 class="mume-header" id="%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93">&#x5F00;&#x53D1;&#x603B;&#x7ED3;</h2>
+
+<blockquote>
+<p>&#x2003;&#x2003;&#x8FD9;&#x4E2A;&#x63D2;&#x4EF6;&#x662F;&#x4E3A;&#x4E86;&#x5B8C;&#x6210;&#x4E00;&#x9879;&#x6D4B;&#x8BD5;&#x9898;&#x5F00;&#x53D1;&#x7684;&#x3002;<br>
+&#x2003;&#x2003;&#x6D4B;&#x8BD5;&#x9898;&#x8BE6;&#x60C5;&#x53EF;&#x4EE5;&#x53C2;&#x7167; question &#x76EE;&#x5F55;&#x4E0B; <a href="question/readme.md">readme.md</a> &#x6587;&#x4EF6;</p>
+</blockquote>
+<blockquote>
+<p>&#x2003;&#x2003;&#x5176;&#x5B9E;&#x4E4B;&#x524D;&#x5728;&#x6211;&#x4E5F;&#x66FE;&#x7ECF;&#x5F00;&#x53D1;&#x8FC7;&#x7C7B;&#x4F3C;&#x7684;&#x5DE5;&#x5177;<br>
+&#x2003;&#x2003;&#x5F53;&#x65F6;&#x4E5F;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x5BF9;&#x7269;&#x4F53;&#x4E0D;&#x540C;&#x89D2;&#x5EA6;&#x8F93;&#x51FA;viewport &#x56FE;&#x7247;&#x4EE5;&#x53CA; Arnold &#x6E32;&#x67D3;&#x7684;&#x56FE;&#x7247;<br>
+&#x2003;&#x2003;&#x4E0D;&#x8FC7;&#x5F53;&#x65F6;&#x6CA1;&#x6709;&#x4F7F;&#x7528; API &#x8FDB;&#x884C;&#x56FE;&#x7247;&#x62FC;&#x63A5;&#xFF0C;&#x800C;&#x662F;&#x4F7F;&#x7528; ffmpeg &#x5C06;&#x591A;&#x5F20;&#x56FE;&#x7247;&#x5408;&#x6210;&#x89C6;&#x9891;<br>
+&#x2003;&#x2003;&#x540E;&#x7EED;&#x7684;&#x6D41;&#x7A0B;&#x662F;&#x901A;&#x8FC7;RV&#x64AD;&#x653E;&#x5668;&#x5355;&#x5E27;&#x6D4F;&#x89C8;&#x89C6;&#x9891;&#x7684;&#x6D41;&#x7A0B;&#x6765;&#x4F7F;&#x7528;&#x7684;&#x3002;<br>
+&#x2003;&#x2003;&#x56E0;&#x6B64;&#x5F53;&#x65F6;&#x8F93;&#x51FA;&#x56FE;&#x7247;&#x4E5F;&#x6CA1;&#x6709;&#x7528;&#x5230; API &#x800C;&#x662F;&#x4F7F;&#x7528; cmds.playblast &#x5DE5;&#x5177;</p>
+</blockquote>
+<blockquote>
+<p>&#x2003;&#x2003;&#x4F7F;&#x7528; API &#x6765;&#x5904;&#x7406;&#x56FE;&#x7247;&#x662F;&#x6211;&#x5B8C;&#x5168;&#x6CA1;&#x60F3;&#x5230;&#x7684;&#x65B9;&#x6848;&#x3002;<br>
+&#x2003;&#x2003;&#x56E0;&#x4E3A;&#x4E4B;&#x524D;&#x516C;&#x53F8;&#x5904;&#x7406;&#x56FE;&#x7247;&#x90FD;&#x662F;&#x57FA;&#x4E8E; Python PIL &#x5E93;&#x6765;&#x5B9E;&#x73B0;<br>
+&#x2003;&#x2003;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x5E93;&#x6709;&#x5F88;&#x591A; C &#x8BED;&#x8A00;&#x7F16;&#x8BD1;&#x7684; Pyd &#x6587;&#x4EF6;&#xFF0C;&#x5B98;&#x65B9;&#x7F16;&#x8BD1;&#x7684; pyd &#x548C; Maya &#x7F16;&#x8BD1;VS&#x7684;&#x7248;&#x672C;&#x4E0D;&#x517C;&#x5BB9;<br>
+&#x2003;&#x2003;&#x8FD0;&#x884C;&#x8D77;&#x6765;&#x4F1A;&#x5BFC;&#x81F4; Maya &#x62A5;&#x9519;&#x3002;</p>
+</blockquote>
+<blockquote>
+<p>&#x2003;&#x2003;&#x5F53;&#x65F6;&#x6211;&#x4EEC;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x901A;&#x8FC7; subprocess &#x5F00;&#x4E00;&#x4E2A;&#x5916;&#x90E8; Python &#x8FDB;&#x7A0B;&#x5BF9;&#x56FE;&#x7247;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;<br>
+&#x2003;&#x2003;&#x4E0D;&#x8FC7;&#x5F00;&#x8FDB;&#x7A0B;&#x7684;&#x5F00;&#x9500;&#x8FD8;&#x662F;&#x633A;&#x5927;&#x7684;&#xFF0C;&#x597D;&#x5728;&#x6211;&#x4EEC;&#x90A3;&#x4E2A;&#x65F6;&#x5019;&#x7684;&#x9700;&#x6C42;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x5904;&#x7406;&#x7684;&#x7ED3;&#x679C;&#x3002;<br>
+&#x2003;&#x2003;&#x5426;&#x5219;Maya&#x8981;&#x672A;&#x54CD;&#x5E94;10&#x591A;&#x79D2;&#x624D;&#x80FD;&#x52A8;&#x3002;</p>
+</blockquote>
+<blockquote>
+<p>&#x2003;&#x2003;&#x540E;&#x6765;&#x7ECF;&#x8FC7;&#x6211;&#x591A;&#x65B9;&#x7684;&#x67E5;&#x8BE2;&#xFF0C;&#x5728;&#x7F51;&#x4E0A;&#x627E;&#x5230;&#x4E86;&#x522B;&#x4EBA;&#x7F16;&#x8BD1;&#x597D;&#x7684; PIL &#x5E93;&#xFF0C;&#x5B8C;&#x7F8E;&#x517C;&#x5BB9; Maya<br>
+&#x2003;&#x2003;&#x867D;&#x7136;&#x8FD9;&#x4E2A; PIL &#x5E93;&#x7248;&#x672C;&#x6709;&#x70B9;&#x8001;&#xFF0C;&#x4F46;&#x662F;&#x56FE;&#x7247;&#x7684;&#x57FA;&#x7840;&#x7F16;&#x8F91;&#x8FD8;&#x662F;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#x7684;<br>
+&#x2003;&#x2003;&#x6700;&#x91CD;&#x8981;&#x7684;&#x662F;&#x4E0D;&#x7528;&#x5F00;&#x8FDB;&#x7A0B;&#xFF0C;&#x6548;&#x7387;&#x9AD8;&#x3002;</p>
+</blockquote>
+<blockquote>
+<p>&#x2003;&#x2003;&#x5728;&#x6536;&#x5230;&#x6D4B;&#x8BD5;&#x9898;&#x524D;&#x4E0D;&#x4E45;&#xFF0C;&#x6211;&#x67E5;&#x8BE2;&#x6587;&#x6863;&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x5076;&#x7136;&#x53D1;&#x73B0;&#x4E86; C++ &#x7684; MImage &#x7C7B;<br>
+&#x2003;&#x2003;&#x90A3;&#x4E2A;&#x65F6;&#x5019;&#x6211;&#x5C31;&#x610F;&#x8BC6;&#x5230;&#x6216;&#x8BB8; Maya &#x81EA;&#x8EAB;&#x5C31;&#x80FD;&#x5B8C;&#x6210;&#x4E00;&#x4E9B;&#x57FA;&#x7840;&#x7684;&#x56FE;&#x7247;&#x7F16;&#x8F91;&#x5DE5;&#x4F5C;&#x3002;<br>
+&#x2003;&#x2003;&#x4E0D;&#x8FC7;&#x90A3;&#x4E2A;&#x65F6;&#x5019;&#x56E0;&#x4E3A;&#x5DE5;&#x4F5C;&#x539F;&#x56E0;&#x6CA1;&#x6709;&#x53BB;&#x6DF1;&#x7A76; MImage &#x7684;&#x4F7F;&#x7528;&#x3002;</p>
+</blockquote>
+<hr>
+<h3 class="mume-header" id="mimage-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86">MImage &#x56FE;&#x50CF;&#x5904;&#x7406;</h3>
+
+<blockquote>
+<p>&#x2003;&#x2003;&#x76F4;&#x5230;&#x5F00;&#x53D1;&#x8FD9;&#x4E2A;&#x63D2;&#x4EF6;&#x624D;&#x5F00;&#x59CB;&#x5728;&#x7F51;&#x4E0A;&#x641C;&#x7D22; MImage &#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x3002;<br>
+&#x2003;&#x2003;&#x8FD9;&#x91CC;&#x9762;&#x7684;&#x5751;&#x8FD8;&#x662F;&#x6709;&#x4E0D;&#x5C11;&#x7684;&#x3002;</p>
+</blockquote>
+<blockquote>
+<p>&#x2003;&#x2003;MImage &#x7684; API &#x8FD8;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x5F88;&#x591A;&#x529F;&#x80FD;&#x90FD;&#x9700;&#x8981;&#x624B;&#x52A8;&#x5B9E;&#x73B0;&#x3002;<br>
+&#x2003;&#x2003;&#x5176;&#x4E2D;&#x6700;&#x4E3A;&#x8BA9;&#x6211;&#x56F0;&#x60D1;&#x7684;&#x5C31;&#x662F; pixels &#x8F6C;&#x989C;&#x8272;&#x7684;&#x8F93;&#x51FA;<br>
+&#x2003;&#x2003;&#x9700;&#x8981;&#x5C06;&#x957F;&#x6574;&#x5F62;&#x7684;&#x6570;&#x636E;&#x8C03;&#x7528; ctypes &#x83B7;&#x53D6;&#x6307;&#x9488;&#x6570;&#x636E;&#x7136;&#x540E;&#x8F6C;&#x6362;&#x4E3A; &#x5B57;&#x7B26;&#x4E32;<br>
+&#x2003;&#x2003;&#x8F6C;&#x6362;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5C31;&#x662F; ASCII &#x7801; 0 - 255 &#x7684;&#x8303;&#x56F4;&#x4E0A;&#x4E86;&#xFF0C;&#x6700;&#x540E;&#x9700;&#x8981;&#x7528; ord() &#x51FD;&#x6570;&#x5C06;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x4E3A;&#x6570;&#x503C;<br>
+&#x2003;&#x2003;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x4E00;&#x6B65;&#x5C06;&#x6570;&#x636E;&#x8F6C;&#x4E3A; QImage &#x518D;&#x4F5C;&#x5904;&#x7406;&#xFF0C; Qt &#x7684;&#x56FE;&#x7247;&#x5904;&#x7406;&#x80FD;&#x529B;&#x6BD4; Maya API &#x5F3A;</p>
+</blockquote>
+<blockquote>
+<p>&#x2003;&#x2003;&#x83B7;&#x53D6;&#x5230;&#x50CF;&#x7D20;&#x989C;&#x8272;&#x6570;&#x636E;&#x4E4B;&#x540E;&#xFF0C;&#x540E;&#x7EED;&#x7684;&#x64CD;&#x4F5C;&#x90FD;&#x597D;&#x8BF4;&#x3002;<br>
+&#x2003;&#x2003;&#x53EA;&#x662F;&#x56E0;&#x4E3A;&#x6570;&#x636E;&#x662F; 1 &#x7EF4;&#x6570;&#x7EC4;&#xFF0C;&#x83B7;&#x53D6;&#x50CF;&#x7D20;&#x4F4D;&#x7F6E;&#x9700;&#x8981;&#x505A;&#x8F6C;&#x6362;&#xFF0C;&#x6BD4;&#x8F83;&#x9EBB;&#x70E6;&#x800C;&#x5DF2;&#x3002;</p>
+</blockquote>
+<h3 class="mume-header" id="qimage-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86">QImage &#x56FE;&#x50CF;&#x5904;&#x7406;</h3>
+
+<blockquote>
+<p>&#x2003;&#x2003;&#x501F;&#x52A9; QPainter &#x6765;&#x7ED8;&#x5236;&#x56FE;&#x50CF;&#x53E0;&#x52A0;&#x5230;&#x539F;&#x56FE;&#x4E0A; &#xFF0C;&#x5E76;&#x4E14; MImage &#x7684;&#x5904;&#x7406;&#x8981;&#x7B80;&#x5355;&#x5F88;&#x591A;&#x3002;<br>
+&#x2003;&#x2003;&#x56E0;&#x4E3A;&#x4E0D;&#x9700;&#x8981;&#x5355;&#x72EC;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x50CF;&#x7D20;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x4E86;&#xFF0C; QPainter &#x7684; drawImage &#x5C01;&#x88C5;&#x5904;&#x7406;&#x4E86;&#x3002;</p>
+<p>&#x2003;&#x2003;&#x4E0D;&#x8FC7; QImage &#x8FD8;&#x662F;&#x6709;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;&#x6CA1;&#x6709; MImage &#x6765;&#x5F97;&#x5B8C;&#x7F8E; <em>(:&#x437;&#x300D;&#x2220;)</em></p>
+<ol>
+<li>drawImage &#x8986;&#x76D6;&#x56FE;&#x7247; alpha &#x503C;&#x4E3A;&#x96F6;&#x7684;&#x90E8;&#x5206;&#x4E0D;&#x4F1A;&#x8986;&#x76D6;&#x5230;&#x80CC;&#x666F;&#x56FE;&#x4E0A;&#xFF0C;&#x8FD9;&#x5BFC;&#x81F4;&#x8F93;&#x51FA; jpg &#x7684;&#x65F6;&#x5019;&#x56FE;&#x7247;&#x989C;&#x8272;&#x4E0D;&#x5BF9;</li>
+<li>Qt &#x5904;&#x7406; RGBA &#x56FE;&#x7247;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x6709;&#x56FE;&#x7247;&#x6570;&#x636E;&#x7684;&#x4E22;&#x5931;&#x7684;&#x60C5;&#x51B5;</li>
+</ol>
+<p>&#x2003;&#x2003;&#x6700;&#x540E;&#x4E34;&#x95E8;&#x4E00;&#x811A;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53D1;&#x73B0; Qt &#x622A;&#x53D6; Maya Viewport &#x65E0;&#x6CD5;&#x6279;&#x91CF;&#x622A;&#x53D6;&#x591A;&#x5F20;&#x56FE;&#xFF0C;<br>
+&#x2003;&#x2003;&#x5BFC;&#x81F4;&#x5408;&#x6210;&#x7684;&#x65F6;&#x5019;&#x5168;&#x90FD;&#x662F;&#x6700;&#x540E;&#x4E00;&#x5F20;&#x56FE;&#xFF0C;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x8FD8;&#x6709;&#x5F85;&#x89E3;&#x51B3;&#x3002;</p>
+</blockquote>
+<h3 class="mume-header" id="pil-%E5%BA%93">PIL &#x5E93;</h3>
+
+<blockquote>
+<p>&#x2003;&#x2003;&#x539F;&#x672C;&#x8FD9;&#x4E2A;&#x5E93;&#x662F;&#x5728;&#x7F51;&#x4E0A;&#x627E;&#x5230;&#x7684;&#xFF0C;&#x517C;&#x5BB9; Maya &#x7F16;&#x8BD1;&#x7684; PIL &#x5E93;&#x3002;<br>
+&#x2003;&#x2003;&#x7136;&#x800C;&#x76EE;&#x524D;&#x65E0;&#x6CD5;&#x5728; Maya2019 &#x4E0A;&#x4F7F;&#x7528;&#x4E86;&#xFF0C;&#x4F30;&#x8BA1;&#x662F; Maya &#x7248;&#x672C;&#x592A;&#x65B0;&#x4E86;&#xFF0C;&#x4F7F;&#x7528;&#x4E86;&#x4E0D;&#x540C; VS &#x7248;&#x672C;&#x7684;&#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#x4E86;</p>
+</blockquote>
+<h3 class="mume-header" id="ui%E5%BC%80%E5%8F%91">UI&#x5F00;&#x53D1;</h3>
+
+<blockquote>
+<p>&#x2003;&#x2003;&#x5176;&#x5B9E;&#x7C7B;&#x4F3C;&#x5730;&#x5F00;&#x53D1;UI&#x5BF9;&#x63A5;json&#x6570;&#x636E;&#x6211;&#x5F88;&#x65E9;&#x4E4B;&#x524D;&#x5C31;&#x5F04;&#x8FC7;&#x4E86;&#xFF0C;&#x7B97;&#x662F;&#x9A7E;&#x8F7B;&#x5C31;&#x719F;&#x4E86;&#x3002;<br>
+&#x2003;&#x2003;&#x9057;&#x61BE;&#x7684;&#x662F;&#xFF0C;&#x4E4B;&#x524D;&#x4E00;&#x76F4;&#x6CA1;&#x80FD;&#x591F;&#x5C06; python Qt &#x5E93;&#x505A;&#x597D;&#x5C01;&#x88C5;&#xFF0C;<br>
+&#x2003;&#x2003;&#x5F88;&#x591A;&#x4E1C;&#x897F;&#x90FD;&#x9700;&#x8981;&#x4ECE;&#x5934;&#x5F00;&#x59CB;&#x5199;&#xFF0C;&#x4EE3;&#x7801;&#x91CF;&#x4E5F;&#x6BD4;&#x8F83;&#x5927;&#xFF0C;&#x590D;&#x7528;&#x7387;&#x5F88;&#x4F4E;&#x3002;<br>
+&#x2003;&#x2003;&#x6240;&#x4EE5;&#x8FD9;&#x6B21;&#x5F00;&#x53D1;&#x5BF9;&#x63A5;&#x6570;&#x636E;&#x4E5F;&#x82B1;&#x4E86;&#x4E00;&#x5929;&#x591A;&#x7684;&#x65F6;&#x95F4;&#x624D;&#x5B8C;&#x6210;_(:&#x437;&#x300D;&#x2220;)_</p>
+</blockquote>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
