@@ -136,3 +136,8 @@ Maya Vieport Capture Tool <br>【Maya视窗截取工具】
 > &emsp;&emsp;很多东西都需要从头开始写，代码量也比较大，复用率很低。    
 > &emsp;&emsp;所以这次开发对接数据也花了一天多的时间才完成_(:з」∠)_    
 
+### 兼容性测试
+
+> &emsp;&emsp;目前插件在 Maya2019 Maya2017 可以正常运行
+> &emsp;&emsp;在 Maya2015 由于 OpenMaya2.0 当时还没有 OpenMayaUI 的库
+> &emsp;&emsp;所以图片库调用会报错，可以考虑使用 OpenMaya1.0 来解决这个问题。
