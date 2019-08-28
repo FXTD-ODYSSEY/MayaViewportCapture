@@ -71,7 +71,7 @@ Maya Vieport Capture Tool <br>【Maya视窗截取工具】
 ## 开发总结
 
 > &emsp;&emsp;这个插件是为了完成一项测试题开发的。    
-> &emsp;&emsp;测试题详情可以参照 question 目录下 [readme.md](question/readme.md) 文件    
+<!-- > &emsp;&emsp;测试题详情可以参照 question 目录下 [readme.md](question/readme.md) 文件     -->
 
 > &emsp;&emsp;其实之前在我也曾经开发过类似的工具    
 > &emsp;&emsp;当时也需要实现对物体不同角度输出viewport 图片以及 Arnold 渲染的图片    

@@ -1,9 +1,9 @@
 {
     "Height_SP": 500, 
     "Crop_CB": true, 
-    "Maya_RB": true, 
+    "Maya_RB": false, 
     "Horizontal_RB": true, 
     "Width_SP": 500, 
-    "Fit_SP": 0.8, 
-    "Limit_CB": true
+    "Limit_CB": true, 
+    "Fit_SP": 0.8
 }
